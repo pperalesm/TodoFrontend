@@ -1,39 +1,48 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router";
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: "",
-      password: "",
-      loginFailed: false
-    }
-    this.handleChange = this.handleChange.bind(this);
-    this.handleLoginClick = this.handleLoginClick.bind(this);
-  }
+function Login(props) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginFailed, setLoginFailed] = useState(false);
+  const navigate = useNavigate();
 
-  render() {
-    return (
-      <div className="Login">
-        {this.state.loginFailed && <div>Login Failed!</div>}
-        <input type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.handleChange}/>
-        <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange}/>
-        <button onClick={this.handleLoginClick}>Login</button>
-      </div>
-    );
-  }
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+  };
 
-  handleChange(event) {
-    this.setState({[event.target.name]: event.target.value})
-  }
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
 
-  handleLoginClick(event) {
-    if (this.state.username === "pperalesm" && this.state.password === "pperalesm") {
-      //this.props.push("/");
+  const handleLoginClick = (e) => {
+    if (username === "pperalesm" && password === "pperalesm") {
+      navigate("/");
     } else {
-      this.setState({loginFailed: true});
+      setLoginFailed(true);
     }
-  }
+  };
+
+  return (
+    <div className="Login">
+      {loginFailed && <div>Login Failed!</div>}
+      <input
+        type="text"
+        name="username"
+        placeholder="Username"
+        value={username}
+        onChange={handleUsernameChange}
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        value={password}
+        onChange={handlePasswordChange}
+      />
+      <button onClick={handleLoginClick}>Login</button>
+    </div>
+  );
 }
 
 export default Login;
