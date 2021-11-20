@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
 class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       username: "",
       password: "",
@@ -29,7 +29,7 @@ class Login extends Component {
 
   handleLoginClick(event) {
     if (this.state.username === "pperalesm" && this.state.password === "pperalesm") {
-      this.setState({loginFailed: false});
+      //this.props.push("/");
     } else {
       this.setState({loginFailed: true});
     }
